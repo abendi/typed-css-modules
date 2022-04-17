@@ -1,5 +1,5 @@
 {
-  "name": "typed-css-modules",
+  "name": "@abendi/typed-css-modules",
   "version": "0.8.0",
   "description": "Creates .d.ts files from CSS Modules .css files",
   "main": "lib/index.js",
