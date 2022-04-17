@@ -5,6 +5,7 @@ import * as chokidar from 'chokidar';
 import _glob from 'glob';
 import { DtsCreator } from './dts-creator';
 import { DtsContent } from './dts-content';
+import { listDifferent } from './list-different';
 
 const glob = util.promisify(_glob);
 
@@ -16,6 +17,7 @@ interface RunOptions {
   namedExports?: boolean;
   dropExtension?: boolean;
   silent?: boolean;
+  listDifferent?: boolean;
 }
 
 export async function run(searchDir: string, options: RunOptions = {}): Promise<void> {
@@ -43,8 +45,14 @@ export async function run(searchDir: string, options: RunOptions = {}): Promise<
     }
   };
 
+  const files = await glob(filesPattern);
+
+  if (options.listDifferent) {
+    await listDifferent(files, creator);
+    return;
+  }
+
   if (!options.watch) {
-    const files = await glob(filesPattern);
     await Promise.all(files.map(writeFile));
   } else {
     console.log('Watch ' + filesPattern + '...');

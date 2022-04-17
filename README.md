@@ -2,6 +2,8 @@
 
 Creates TypeScript definition files from [CSS Modules](https://github.com/css-modules/css-modules) .css files.
 
+> NOTE: this is fork of https://github.com/Quramy/typed-css-modules
+
 If you have the following css,
 
 ```css
@@ -87,6 +89,11 @@ tcm -p 'src/**/*.icss' .
 #### watch
 
 With `-w` or `--watch`, this CLI watches files in the input directory.
+
+#### validating type files
+
+With `-l` or `--listDifferent`, list any files that are different than those that would be generated.
+If any are different, exit with a status code 1.
 
 #### camelize CSS token
 
